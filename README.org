@@ -1,0 +1,7 @@
+#+title: Godot Laigter Integration
+
+* About
+This editor plugin adds a button to the CanvasTexture2D node's normal and specular map textures by generating them using [[https://github.com/azagaya/laigter][Laigter.]]
+
+* Usage
+Add this plugin to your Godot project, set your Laigter executable path in src_sh[:exports code]{ Project Settings -> Import -> Laigter Path }, create a Canvas2D node, set a diffuse texture and under both normal and specular map sections, press the generate button.
