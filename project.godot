@@ -1,0 +1,27 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Laigter Integration"
+config/features=PackedStringArray("4.3", "Forward Plus")
+
+[dotnet]
+
+project/assembly_name="Laigter Integration"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/laigter/plugin.cfg")
+
+[filesystem]
+
+import/laigter_path="/Users/gkazlauskas/.local/bin/laigter"
+import/laigter/laigter_path="/Users/gkazlauskas/.local/bin/laigter"
