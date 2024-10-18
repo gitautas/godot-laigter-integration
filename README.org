@@ -34,8 +34,11 @@ The Laigter Plugin is a tool for Godot that automates the generation of normal a
 
 - Ensure that the Laigter binary is correctly installed and accessible from the specified path. The plugin verifies the binary upon startup and will notify you if it cannot be found in your ~PATH~.
 - The output textures will be generated in the same directory as the original diffuse texture, with ~_n~ or ~_s~ appended to the file name.
-** TODO:
-- Add additional settings for software rendering, occlusion and parallax textures and loading default Laigter presets
+*** TODO:
+Support additional settings:
+- Software rendering
+- Occlusion and parallax textures
+- Loading default Laigter presets
 
 * Contribution
 Contributions are welcome! Feel free to submit issues or pull requests to improve the plugin or enhance its functionality.
