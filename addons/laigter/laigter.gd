@@ -15,19 +15,38 @@ class LaigterEditor extends EditorProperty:
     var parent
     var texture_type
 
+    enum TextureType {
+        NORMAL,
+        SPECULAR
+    }
+
     func _init(object, type):
         parent = object
-        texture_type = type
+        if type == "normal_texture":
+            texture_type = TextureType.NORMAL
+        elif type == "specular_texture":
+            texture_type = TextureType.SPECULAR
+
         add_child(property_control)
         add_focusable(property_control)
+
         property_control.pressed.connect(generate)
         property_control.text = "Generate"
 
     func generate():
         var diffuse_texture = parent.diffuse_texture.resource_path.replace("res://", ProjectSettings.globalize_path("res://"))
         var diff_file = parent.diffuse_texture.resource_path.get_file()
-        var extension = "_n" if texture_type == "normal_texture" else "_s"
-        var type_arg = "-n" if texture_type == "normal_texture" else "-c"
+
+        var extension = ""
+        var type_arg = ""
+
+        match texture_type:
+            TextureType.NORMAL:
+                extension = "_n"
+                type_arg = "-n"
+            TextureType.SPECULAR:
+                extension = "_s"
+                type_arg = "-c"
 
         var gen_file = diff_file.get_basename() + extension + "." + diff_file.get_extension()
         var gen_path = parent.diffuse_texture.resource_path.replace(diff_file, gen_file)
@@ -36,15 +55,16 @@ class LaigterEditor extends EditorProperty:
         var exit_code = OS.execute(laigter_path, ["-g", "-d", diffuse_texture, type_arg], output, true, false)
 
         if exit_code != 0:
-            push_error("Error generating texture: " + output.join("\n"))
+            push_error("Laigter: Error generating texture: " + "\n".join(output))
             return
 
         var image = Image.load_from_file(gen_path)
         var texture = ImageTexture.create_from_image(image)
 
-        if texture_type == "normal_texture":
-            parent.normal_texture = texture
-        elif texture_type == "specular_texture":
-            parent.specular_texture = texture
-
-        print("Generated " + " ".join(texture_type.split("_")))
+        match texture_type:
+            TextureType.NORMAL:
+                parent.normal_texture = texture
+                print("Laigter: Generated normal texture")
+            TextureType.SPECULAR:
+                parent.specular_texture = texture
+                print("Laigter: Generated specular texture")
