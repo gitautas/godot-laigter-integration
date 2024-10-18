@@ -1,7 +1,46 @@
-#+title: Godot Laigter Integration
+#+title: Godot Laigter Plugin
 
-* About
-This editor plugin adds a button to the CanvasTexture2D node's normal and specular map textures by generating them using [[https://github.com/azagaya/laigter][Laigter.]]
+* Overview
+The Laigter Plugin is a tool for Godot that automates the generation of normal and specular maps from diffuse textures by using [[https://github.com/azagaya/laigter][Laigter]], this plugin adds a button to generate textures.
 
+
+* Installation
+1. **Download the Plugin**: Clone or download the repository from GitHub.
+2. **Add to Godot**:
+   - Copy the `laigter` folder into your Godot project's `addons` directory.
+   - Open your project in Godot.
+3. **Enable the Plugin**:
+   - Go to `Project` -> `Project Settings` -> `Plugins`.
+   - Find the Laigter Plugin and enable it.
+4. **Set Laigter Path**:
+        If `laigter` is not available in your `PATH`
+   - Go to `Project` -> `Project Settings` -> `Filesystem` -> `Import`.
+   - Set the `laigter_path` to the location of your Laigter binary. The default is `"laigter"`.
+   - If the path is not set, the plugin will prompt you to configure it.
 * Usage
-Add this plugin to your Godot project, set your Laigter executable path in ~Project Settings -> Import -> Laigter Path~, create a Canvas2D node, set a diffuse texture and under both normal and specular map sections, press the generate button.
+** Texture Generation
+
+1. **Select a Texture**:
+   - In the Godot editor, select a node that has a `CanvasTexture` assigned.
+
+2. **Open Inspector**:
+   - In the Inspector panel, locate the `normal_texture` or `specular_texture` properties.
+
+3. **Generate Maps**:
+   - Click the "Generate" button next to the respective property.
+   - The plugin will automatically generate the corresponding normal or specular map based on the diffuse texture.
+
+* Notes
+
+- Ensure that the Laigter binary is correctly installed and accessible from the specified path. The plugin verifies the binary upon startup and will notify you if it cannot be found in your `PATH`.
+- The output textures will be generated in the same directory as the original diffuse texture, with `_n` or `_s` appended to the file name.
+
+* Contribution
+Contributions are welcome! Feel free to submit issues or pull requests to improve the plugin or enhance its functionality.
+
+* License
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program. If not, see https://www.gnu.org/licenses/.
