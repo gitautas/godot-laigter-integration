@@ -20,24 +20,14 @@ class LaigterEditor extends EditorProperty:
         texture_type = type
         add_child(property_control)
         add_focusable(property_control)
-        property_control.pressed.connect(_on_button_pressed)
+        property_control.pressed.connect(generate)
         property_control.text = "Generate"
-
-    func _on_button_pressed():
-        generate()
 
     func generate():
         var diffuse_texture = parent.diffuse_texture.resource_path.replace("res://", ProjectSettings.globalize_path("res://"))
         var diff_file = parent.diffuse_texture.resource_path.get_file()
-        var extension
-        var type_arg
-
-        if texture_type == "normal_texture":
-            extension = "_n"
-            type_arg =  "-n"
-        elif texture_type == "specular_texture":
-            extension = "_s"
-            type_arg =  "-c"
+        var extension = "_n" if texture_type == "normal_texture" else "_s"
+        var type_arg = "-n" if texture_type == "normal_texture" else "-c"
 
         var gen_file = diff_file.get_basename() + extension + "." + diff_file.get_extension()
         var gen_path = parent.diffuse_texture.resource_path.replace(diff_file, gen_file)
@@ -56,4 +46,5 @@ class LaigterEditor extends EditorProperty:
             parent.normal_texture = texture
         elif texture_type == "specular_texture":
             parent.specular_texture = texture
+
         print("Generated " + " ".join(texture_type.split("_")))

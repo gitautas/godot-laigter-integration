@@ -1,8 +1,10 @@
 @tool
 extends EditorPlugin
 
+const SETTING_LAIGTER_PATH = "filesystem/import/laigter/laigter_path"
+
 var plugin
-var laigter_path = ProjectSettings.get_setting("filesystem/import/laigter/laigter_path")
+var laigter_path = ProjectSettings.get_setting(SETTING_LAIGTER_PATH)
 
 func _enter_tree():
     register_settings()
@@ -18,20 +20,20 @@ func _exit_tree():
 
 
 func register_settings():
-    if ProjectSettings.get_setting("filesystem/import/laigter/laigter_path") == null:
-        ProjectSettings.set_setting("filesystem/import/laigter/laigter_path", "laigter")
+    if ProjectSettings.get_setting(SETTING_LAIGTER_PATH) == null:
+        ProjectSettings.set_setting(SETTING_LAIGTER_PATH, "laigter")
 
-    ProjectSettings.set_initial_value("filesystem/import/laigter/laigter_path", "laigter")
+    ProjectSettings.set_initial_value(SETTING_LAIGTER_PATH, "laigter")
     ProjectSettings.add_property_info({
-        "name": "filesystem/import/laigter/laigter_path",
+        "name": SETTING_LAIGTER_PATH,
         "type": TYPE_STRING,
         "hint": PROPERTY_HINT_GLOBAL_FILE
     })
-    ProjectSettings.set_as_basic("filesystem/import/laigter/laigter_path", true)
+    ProjectSettings.set_as_basic(SETTING_LAIGTER_PATH, true)
 
 
 func verify_laigter_path():
-    var current_path = ProjectSettings.get_setting("filesystem/import/laigter/laigter_path")
+    var current_path = ProjectSettings.get_setting(SETTING_LAIGTER_PATH)
 
     if laigter_path == current_path:
         return
