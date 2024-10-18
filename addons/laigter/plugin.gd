@@ -35,11 +35,9 @@ func register_settings():
 func verify_laigter_path():
     var current_path = ProjectSettings.get_setting(SETTING_LAIGTER_PATH)
 
-    if laigter_path == current_path:
-        return
-
-    laigter_path = current_path
-    check_laigter_binary()
+    if laigter_path != current_path:
+        laigter_path = current_path
+        check_laigter_binary()
 
 
 func check_laigter_binary():
@@ -48,5 +46,4 @@ func check_laigter_binary():
 
     if exit_code != 0:
         push_error("Failed to verify Laigter binary. Set the path to the Laigter binary in Project Settings -> Input:")
-        for line in output:
-            push_error(line)
+        push_error("\n".join(output))
