@@ -45,5 +45,5 @@ func check_laigter_binary():
     var exit_code = OS.execute(laigter_path, ["-h"], output, true, false)
 
     if exit_code != 0:
-        push_error("Failed to verify Laigter binary. Set the path to the Laigter binary in Project Settings -> Input:")
+        push_error("Failed to verify Laigter binary. Set the path to the Laigter binary in Project Settings -> Import:")
         push_error("\n".join(output))
